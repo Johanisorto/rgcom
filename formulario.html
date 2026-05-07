@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulario Personal</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="formulario">
+    <h2>Datos Personales</h2>
+
+    <form id="miFormulario">
+
+        <label>Nombre:</label>
+        <input type="text" id="nombre" required>
+
+        <label>Edad:</label>
+        <input type="number" id="edad" required>
+
+        <label>Correo:</label>
+        <input type="email" id="correo" required>
+
+        <label>Fotografía:</label>
+        <input type="file" id="foto" accept="image/*">
+
+        <img id="preview" src="" alt="Vista previa">
+
+        <button type="submit">Guardar</button>
+    </form>
+
+    <div id="mensaje"></div>
+    
+</div>
+<script>
+
+    document.getElementById("foto").addEventListener("change", function(event){
+
+        const archivo = event.target.files[0];
+
+        if(archivo){
+
+            const lector = new FileReader();
+
+            lector.onload = function(e){
+                document.getElementById("preview").src = e.target.result;
+            }
+
+            lector.readAsDataURL(archivo);
+        }
+    });
+
+    // Mensaje al enviar formulario
+    document.getElementById("miFormulario").addEventListener("submit", function(e){
+
+        e.preventDefault();
+
+        document.getElementById("mensaje").innerHTML =
+        "Datos guardados correctamente.";
+
+    });
+
+</script>
+</body>
+</html>
